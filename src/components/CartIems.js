@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-const ListItem = ({ item ,handleDelete=()=>{},handleAdd=()=>{}}) => {
+const CartItem = ({ item ,handleDelete=()=>{}}) => {
+    
     const [quantity,setQuantity] = useState('')
     const handleChange = (e)=>{
         setQuantity(e.target.value);
     }
+    
     return (
         <div className="list-item">
             {/* Left: Medicine details */}
@@ -27,12 +29,12 @@ const ListItem = ({ item ,handleDelete=()=>{},handleAdd=()=>{}}) => {
                     value={quantity}
                     onChange={handleChange}
                 />
-                <button onClick={()=>handleAdd(item)}> <i className="bi bi-bag-plus-fill"></i> </button>
+                
                 <button onClick={()=>handleDelete(item.id)}><i className="bi bi-trash"></i></button>                
             </div>
         </div>
     );
 };
 
-export default ListItem
+export default CartItem
 
