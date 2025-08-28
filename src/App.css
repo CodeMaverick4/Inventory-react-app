@@ -1,38 +1,115 @@
-.App {
-  text-align: center;
+h1 ,h2, h3 ,h4, h5, h6, p{
+  margin: 0px !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+input,
+button{
+    outline: none !important;
+    border: none !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.topbar {
+    height: 68px;
+    background-color: #0d6efd;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: end;
+    align-items: center;    
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;    
+    z-index: 1000;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* common input css  */
+.input_container {
+    position: relative;
+    border: 2px solid #9daab6;
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+    width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.input_container:focus-within {
+    border: 2px solid #0d6efd;
+    box-shadow: 0px 0px 5px 1px #659ae8;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input_label_pos {
+    position: absolute;
+    top: 0px;
+    transform: translate(0%, -70%);
+    left: 10px;
+    z-index: 1;
+    background: #fff;
+    padding: 0px 4px;
+    font-size: 0.775rem;
+    font-weight: 600;
+    color: gray;
+}
+
+.input_container:focus-within .input_label_pos {
+    color: #2275fc;
+}
+
+.input_container input {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #6b6a6a;
+    height: 43px;
+    width: 100%;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+}
+
+.input_container:focus-within input {
+    color: #111;
+}
+
+/* common button css  */
+.button-base {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 8px;
+    border-radius: 12px;
+    padding: 7px 15px;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+.button-primary {
+    border: 2px solid #2275fc !important;
+    color: #2275fc;
+}
+
+.button-primary:hover {
+    /* transform: scale(103%); */
+    color: white;
+    background-color: #2275fc;
+}
+
+.button-primary:hover div {
+    color: #fff !important;
+}
+
+
+.list-input{
+  border-radius: 5px !important;
+  border: 1px solid gray !important;
+  padding: 5px;
+  font-size: 12px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
