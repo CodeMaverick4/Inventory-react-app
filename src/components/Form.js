@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import { toast } from 'react-toastify';
 
 const Form = () => {
+    // console.log("form rendering ...");
     const { inventoryItems, setInventoryItem } = useContext(InventoryItemsContext)
     const [formData, setFormData] = useState({
         medicineName: "",
@@ -50,7 +51,7 @@ const Form = () => {
                 <div className=""><Input type={'text'} name={"medicineDescription"} value={formData.medicineDescription} label={"Description"} placeholder={"Enter Description"} onChange={handleChange} /></div>
                 <div className=""><Input type={'number'} name={"price"} value={formData.price} label={"Price"} placeholder={"Enter Price"} onChange={handleChange} /></div>
                 <div className=""><Input type={'number'} name={"quantity"} value={formData.quantity} label={"Quantity"} placeholder={"Enter Quantity"} onChange={handleChange} /></div>
-                <Button extraCss="" icon={<i class="bi bi-bag-plus-fill"></i>} label="Add to Inventory" onClick={handleAddItem} />
+              <Button extraCss="" icon={<i className="bi bi-bag-plus-fill"></i>} label="Add to Inventory" onClick={handleAddItem} />
             </div>
         </div>
     )

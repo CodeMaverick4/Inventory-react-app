@@ -1,14 +1,15 @@
+import React, { useContext } from "react";
 import Button from "./Button"
+import { CartContext } from "../context/CartContext";
 
-const Topbar = ({setOpenModal})=>{
+const Topbar = ({openCart})=>{
+    // console.log("topbar rendering ...");
+    const {cartItems} = useContext(CartContext);
     
-    const handleOpenModal = ()=>{
-        setOpenModal(true)
-    }
     return(
         <div className="topbar">
-            <Button icon={<i class="bi bi-cart-fill"></i>} label="Cart"  onClick={handleOpenModal} />
+            <Button  icon={<i className="bi bi-cart-fill"></i>} label="Cart"  extraCss="cart-btn-css" totalCount={cartItems.length} onClick={openCart} />
         </div>
     )
 }
-export default Topbar
+export default React.memo(Topbar)

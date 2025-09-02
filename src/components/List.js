@@ -5,27 +5,47 @@ import { toast } from "react-toastify"
 import { CartContext } from "../context/CartContext"
 
 const List = () => {
+    // console.log("List rendering ...");
     const { inventoryItems, setInventoryItem } = useContext(InventoryItemsContext);
-    const {cartItems,setCartItems} = useContext(CartContext);
+    const {cartItems,setCartItems, totalAmount,setTotalAmount} = useContext(CartContext);
 
-    const handleDelete = (id) => {        
+    const handleDeleteInventoryItem = (id) => {        
         let removedItem = inventoryItems.find(item => item.id === id);
         let name = removedItem ? removedItem.medicineName : "";
 
         const filteredItems = inventoryItems.filter(item => item.id !== id);
         setInventoryItem(filteredItems)
-        toast.error(`${name} is deleted successfully.`);
+        toast.success(`${name} is deleted successfully.`);
     }
 
-    const handleAdd = (item) => {
-        setCartItems(prev => [...prev, item])
-        toast.success(`${item.medicineName} Successfully Added`);
+    const handleAddToCart = (item,clearInput) => {
+        if(item.quantity === 0 || item.quantity === ''){
+            toast.error(`Please add minimum 1 quantity`);    
+            return
+        }
+        const hasItem = cartItems.find(invtItem=> item.medicineName === invtItem.medicineName )
+        if(hasItem){
+            toast.error(`${item.medicineName} already exist`);    
+            return
+        }
+        const updatedInventoryItems = inventoryItems.map(invtItem=>{
+            if(item.id === invtItem.id){
+                return {...invtItem,quantity:invtItem.quantity - item.quantity}
+            }else{
+                return invtItem
+            }
+        })
+        setTotalAmount(prev=>prev+item.quantity*item.price)
+        setInventoryItem(updatedInventoryItems)
+        setCartItems(prev => [...prev, item])    
+        clearInput()    
     }
     
+    // console.log("cartItems ",cartItems)
     return (
-        <div className="list-container">
-            {inventoryItems.length > 0 ? inventoryItems.map(item => (
-                <ListItem item={item} handleAdd={handleAdd} handleDelete={handleDelete} />
+        <div className="list-container px-md-5 px-3">
+            {inventoryItems.length > 0 ? inventoryItems.map((item,index) => (
+                <ListItem key={`inventory_${index}`} item={item} handleAdd={handleAddToCart} handleDelete={handleDeleteInventoryItem} />
             )) :
                 <p className="text-center py-5">No Item added yet in inventory</p>
             }
